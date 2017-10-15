@@ -80,15 +80,13 @@ int poke_announce(int sockfd, const char *iface_name, const char to[ETH_ALEN]) {
 }
 
 int poke_recv(int sockfd, char from[ETH_ALEN], struct poke_packet *packet) {
-	int num;
-	struct ethhdr *hdr;
+	struct sockaddr_ll addr;
 	char buf[POKE_LEN];
 
 	while (1) {
-		struct sockaddr_ll addr;
 		socklen_t addr_len = sizeof(struct sockaddr_ll);
-		if ((num = recvfrom(sockfd, buf, POKE_LEN, 0, (struct sockaddr *)&addr,
-						&addr_len)) == -1) {
+		if (recvfrom(sockfd, buf, POKE_LEN, 0, (struct sockaddr *)&addr,
+						&addr_len) == -1) {
 			perror("could not recv packet");
 			return -1;
 		}
@@ -141,4 +139,5 @@ int iface2info(const char *iface_name, int *iface, void *hw_addr, void *inet_add
 	close(sockfd);
 	
 	memcpy(inet_addr, ifr.ifr_addr.sa_data+2, 4);
+	return 0;
 }

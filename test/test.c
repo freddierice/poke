@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "string.h"
 
-#include "poke.h"
+#include "../poke.h"
 
 int main(int argc, const char *argv[]) {
 	
