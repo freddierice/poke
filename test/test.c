@@ -6,7 +6,7 @@
 int main(int argc, const char *argv[]) {
 	
 	int sockfd, num, send;
-	char to[6] = "\x00\x28\xf8\x1d\xde\xc2";
+	char to[6] = "\x00\x11\x22\x33\x44\x55";
 	if (argc != 2) {
 		fprintf(stderr, "need to send or recv\n");
 		return 1;
